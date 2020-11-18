@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>ws demo</title>
+</head>
+
+<body>
+    <p id="title"></p>
+    <script>
+        const ws = new WebSocket('ws://127.0.0.1:8000');
+        ws.onopen = () => {
+            console.log('client：ws connection is open')
+            ws.send('客户端已经收到消息...')
+        }
+
+        ws.onmessage = (event) => {
+            console.log('client receive message：', event);
+            document.getElementById('title').innerText = event.data
+        }
+    </script>
+</body>
+
+</html>
