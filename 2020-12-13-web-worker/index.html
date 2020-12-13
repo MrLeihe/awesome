@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+	<title>web worker</title>
+	<link rel="shortcut icon" href="favicon.ico" />
+	<link rel="stylesheet" href="css/index.css" />
+</head>
+
+<body>
+
+	<style type="text/css">
+		.image {
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+
+	<div id="container">
+		<div class="hello">hello world</div>
+		<div class="dragable" ondrop="handleDrop(event)" ondragover="handleDragOver(event)"></div>
+		<input type="file" id="file-input" multiple />
+		<img id="image" class="image" />
+	</div>
+
+	<script type="text/javascript">
+		var worker = new Worker('http://127.0.0.1:5500/2020-12-13-web-worker/worker.js')
+		worker.postMessage('hello world')
+		worker.onmessage = event => {
+			console.log('收到worker线程发来的消息：', event)
+		}
+	</script>
+
+</body>
+
+</html>
