@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="./main.css" />
+</head>
+
+<body>
+    <div id="name">stone</div>
+    <script async type="text/javascript" src="./main.js"></script>
+    <script defer type="text/javascript" src="./defer.js"></script>
+    <script>
+        window.onload = () => {
+            console.log('onload--')
+        }
+        document.addEventListener('DOMContentLoaded', (event) => {
+            console.log('DOMContentLoaded--')
+        })
+    </script>
+    <div id="other">test</div>
+</body>
+
+</html>
