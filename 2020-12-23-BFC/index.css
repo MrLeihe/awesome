@@ -1,0 +1,25 @@
+.wrap {
+  /* bfc */
+  overflow: hidden;
+}
+
+.top {
+  margin-top: 20px;
+  background-color: aquamarine;
+  margin-bottom: 20px;
+}
+
+.bottom {
+  margin-top: 20px;
+  background-color: bisque;
+}
+
+.first-right {
+  float: left;
+  margin-right: 20px;
+}
+
+.second-right {
+  float: left;
+  margin-left: 20px;
+}
