@@ -1,0 +1,3 @@
+function mountComponent() {}
+
+function updateComponent() {}

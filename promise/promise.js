@@ -156,6 +156,9 @@ Promise.prototype.finally = function (callback) {
 }
 
 Promise.resolve = function (value) {
+  if (value instanceof Promise) {
+    return value
+  }
   return new Promise((resolve, reject) => {
     resolve(value)
   })
@@ -214,31 +217,6 @@ Promise.race = function (promises) {
     }
   })
 }
-
-new Promise((resolve, reject) => {
-  reject('stone')
-})
-  .then((value) => {
-    console.log(value)
-  })
-  .catch((reason) => {
-    console.log('catch:', reason)
-  })
-  .finally(() => {
-    console.log('finally')
-  })
-
-Promise.reject('pony').catch((value) => {
-  console.log(value)
-})
-
-Promise.race([Promise.reject('2'), 3])
-  .then((res) => {
-    console.log(res)
-  })
-  .catch((reason) => {
-    console.log('all-catch:', reason)
-  })
 
 Promise.defer = Promise.deferred = function () {
   let dfd = {}
