@@ -1,22 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import store from './store'
 import './index.css'
+import LoadWrapper from './components/LoadWrapper'
 
 function App() {
-  return <div title="test">Hello world</div>
+  return (
+    <Provider store={store}>
+      <LoadWrapper />
+    </Provider>
+  )
 }
 
-const element = React.createElement('div', { title: 'test' }, 'Hello world')
-
-function render() {
-  const node = document.createElement(element.type)
-  node.title = element.props.title
-  const text = document.createTextNode(element.props.children)
-  node.appendChild(text)
-  const container = document.getElementById('root')
-  container.appendChild(node)
-}
-
-render()
-
-// ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))
