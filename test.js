@@ -1,3 +1,9 @@
-const _ = require('lodash')
+const dayjs = require('dayjs')
+const duration = require('dayjs/plugin/duration')
+const isToday = require('dayjs/plugin/isToday')
 
-console.log(_.add(0.1 + 0.2))
+dayjs.extend(duration)
+dayjs.extend(isToday)
+
+console.log(dayjs.duration(5184000000).weeks())
+console.log(dayjs.duration(1500).minutes())

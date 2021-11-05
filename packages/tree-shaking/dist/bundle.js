@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log(function(){for(var n=arguments.length,r=new Array(n),t=0;t<n;t++)r[t]=arguments[t];return 0===r.length?function(n){return n}:1===r.length?r[0]:r.reduce((function(n,r){return function(){return n(r.apply(void 0,arguments))}}))}((n=>n-9),((n,r)=>n+r))(4,5))})();

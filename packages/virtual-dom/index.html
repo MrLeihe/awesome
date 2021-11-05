@@ -4,18 +4,19 @@
 <head></head>
 
 <body>
-    <div id="root" onclick="handleClick(event)">点击添加元素</div>
+  <div id="root" onclick="handleClick(event)">点击添加元素</div>
+  <input maxlength="1" />
 
-    <script>
-        var rootEl = document.getElementById("root")
+  <script>
+    var rootEl = document.getElementById("root")
 
-        function handleClick(event) {
-            console.log(event)
-            var newElement = document.createElement('div')
-            newElement.innerHTML = 'stone'
-            rootEl.appendChild(newElement)
-        }
-    </script>
+    function handleClick(event) {
+      console.log(event)
+      var newElement = document.createElement('div')
+      newElement.innerHTML = 'stone'
+      rootEl.appendChild(newElement)
+    }
+  </script>
 </body>
 
 </html>
