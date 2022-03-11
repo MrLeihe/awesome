@@ -1,5 +1,12 @@
-function add(a, b) {
-  return a + b
+let count = {
+  value: 1,
 }
 
-exports.default = add
+function add() {
+  count.value++
+}
+
+module.exports = {
+  count,
+  add,
+}

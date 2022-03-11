@@ -1,6 +1,5 @@
-console.log('running sum.js')
-export const sum = (a, b) => a + b
+import { count, add } from './base-es6.mjs'
 
-// module.js
-export default () => 'Hello world'
-export const name = 'Lydia'
+console.log('count===', count)
+add()
+console.log('count===', count)

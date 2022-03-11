@@ -5,6 +5,27 @@ class Counter extends React.PureComponent {
   constructor(props) {
     super(props)
     console.log('props===', props)
+    this.state = {
+      count: 0,
+    }
+  }
+
+  incrementCount() {
+    this.setState((state) => {
+      return {
+        count: state.count + 1,
+      }
+    })
+  }
+
+  componentDidMount() {
+    this.incrementCount()
+    this.incrementCount()
+    this.incrementCount()
+
+    setTimeout(() => {
+      console.log('count==', this.state.count)
+    })
   }
 
   handlePlus = () => {

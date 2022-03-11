@@ -6,11 +6,65 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite App</title>
+  <!-- <link rel="prefetch" href="./assets/hero.png" /> -->
+  <script type="module" src="./dist/bundle.js"></script>
+  <script type="module" src="https://static-kaop.sdyxmall.com/h5/public/js/chunk-5e88cf40.e1242609.js"></script>
+  <script src="https://static-kaop.sdyxmall.com/mng/source/download/1.4.8/download.min.js"></script>
+  <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_911670_0x8avsm3zb9.css" /> -->
+  <script type="text/javascript" src="//at.alicdn.com/t/font_911670_0x8avsm3zb9.js"></script>
+
+  <style type="text/css">
+    .icon {
+      width: 1em;
+      height: 1em;
+      vertical-align: -0.15em;
+      fill: currentColor;
+      overflow: hidden;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="app"></div>
-  <script type="module" src="./dist/bundle.js"></script>
+
+  <div id="app">
+    <!-- <img class="hero-img" src="./assets/hero.png" /> -->
+    <button id="download">下载</button>
+
+    <svg class="icon" aria-hidden="true">
+      <use xlink:href="#icon-sanjiaoxingcopyx"></use>
+    </svg>
+  </div>
+  <script>
+
+
+
+    document.getElementById('download').onclick = function () {
+      downloadFile('https://static-kaop.sdyxmall.com/pre-h5/m-kaop.sdyxmall.com-20200509T114439.html')
+    }
+
+
+    function downloadFile(url) {
+      // if (url) window.location.href = url
+      var xmlHttp = null
+      if (window.XMLHttpRequest) {
+        // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+        xmlHttp = new XMLHttpRequest()
+      }
+      if (xmlHttp != null) {
+        xmlHttp.open('get', url, true)
+        xmlHttp.responseType = 'blob' //关键
+        xmlHttp.send()
+        xmlHttp.onreadystatechange = doResult //设置回调函数
+      }
+      function doResult() {
+        if (xmlHttp.readyState === 4) {
+          if (xmlHttp.status === 200) {
+            window.download(xmlHttp.response, '苏打优选核销系统.html', 'text/html')
+          }
+        }
+      }
+    }
+  </script>
 </body>
 
 </html>

@@ -1,13 +1,64 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
   <HelloWorld msg="Hello Vue 3 + Vite" />
+  <div>count: {{countRef}}</div>
+  <button @click="increment">增加</button>
+  <input type="file" @change="handleFile" />
 </template>
 
-<script setup>
+<script>
+import { ref, reactive, isReactive, toRefs, toRef, defineComponent, onMounted } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 
-// This starter template is using Vue 3 experimental <script setup> SFCs
-// Check out https://github.com/vuejs/rfcs/blob/script-setup-2/active-rfcs/0000-script-setup.md
+export default defineComponent({
+  components: {
+    HelloWorld,
+  },
+  setup(props) {
+    const count = ref(1)
+
+    const reactValue = reactive({ count })
+
+    console.log('reactValue==', reactValue)
+
+    const copy = toRefs(reactValue)
+
+    const { count: countRef } = copy
+
+    console.log('countRef==', countRef)
+
+    const increment = () => {
+      count.value++
+    }
+
+    onMounted(() => {
+      console.log('onMounted====')
+    })
+
+    const foo = (a, b) => {
+      console.log(Array.prototype.slice.call(arguments))
+    }
+
+    const goo = function(a, b) {}
+
+    foo(1, 2)
+
+    console.log('foo====', foo)
+    console.dir(foo)
+    console.dir(goo)
+
+    return {
+      countRef,
+      increment,
+    }
+  },
+  methods: {
+    handleFile(event) {
+      console.log('handleFile==', event.target.files)
+      const file = event.target.files[0]
+      console.log(file.slice(0, 1024))
+    },
+  },
+})
 </script>
 
 <style>

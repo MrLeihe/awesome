@@ -21,6 +21,20 @@ function LoadWrapper(props) {
     }
 
     getUserInfo()
+
+    const log = () => {
+      if (count < 2) {
+        console.log('execute requestAnimationFrame...')
+        requestAnimationFrame(log)
+      }
+      count++
+    }
+
+    let count = 0
+
+    const rafId = requestAnimationFrame(log)
+
+    window.cancelAnimationFrame(rafId)
   }, [])
 
   return (

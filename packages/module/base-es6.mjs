@@ -1,3 +1,9 @@
-console.log('running index.js')
-import * as data from './es6'
-console.log(data)
+let count = {
+  value: 1,
+}
+
+function add() {
+  count.value++
+}
+
+export { count, add }

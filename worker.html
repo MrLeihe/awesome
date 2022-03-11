@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var w1 = new Worker('./w1.js')
+    var w2 = new Worker('./w2.js')
+    var { port1, port2 } = new MessageChannel()
+
+    window.requestIdleCallback(() => {
+      console.log('处于空闲状态')
+      w1.postMessage(null, [port1])
+      w2.postMessage(null, [port2])
+    })
+
+  </script>
+</body>
+
+</html>

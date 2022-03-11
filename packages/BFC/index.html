@@ -2,24 +2,68 @@
 <html>
 
 <head>
-    <link rel='stylesheet' href="./index.css" />
+
+  <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    name="viewport" />
+  <link rel='stylesheet' href="./index.css" />
 </head>
 
 <body>
-    <div id="root">
-        <div class="wrap">
-            <div class="top">测试顶部间距</div>
-        </div>
-        <div class="wrap">
-            <div class="bottom">测试底部间距</div>
-        </div>
-        <div class="first-right">first</div>
-        <div class="second-right">second</div>
+  <div id="root">
+    <div class="wrap">
+      <div class="top">测试顶部间距</div>
     </div>
+    <div class="wrap">
+      <div class="bottom">测试底部间距</div>
+    </div>
+    <div class="display-test">
+      <div class="first-right">first</div>
+      <div class="second-right">second</div>
+    </div>
+    <ul>
+      <li>1</li>
+      <li>2</li>
+    </ul>
+  </div>
 
-    <script>
+  <script>
 
-    </script>
+    function download() {
+      const imageUrl = 'https://static-kaop.sdyxmall.com/upload/24acf931026c7dd3a9a011b27faf00354240f19d-103c-45d3-a5a8-91f732c1787d.jpg'
+      const xhr = new XMLHttpRequest()
+      xhr.open('GET', imageUrl)
+      xhr.onload = (res) => {
+        console.log('onload===', res.target.response)
+        saveAs(res.target.response)
+      }
+      xhr.onerror = (err) => {
+        console.log('onerror===', err)
+      }
+      xhr.responseType = 'blob'
+      xhr.send()
+    }
+
+    function click(node) {
+      try {
+        node.dispatchEvent(new MouseEvent('click'))
+      } catch (e) {
+        var evt = document.createEvent('MouseEvents')
+        evt.initMouseEvent('click', true, true, window, 0, 0, 0, 80,
+          20, false, false, false, false, 0, null)
+        node.dispatchEvent(evt)
+      }
+    }
+
+    function saveAs(blob) {
+      var a = document.createElement('a')
+      a.download = blob.name || 'download.jpg'
+      a.href = URL.createObjectURL(blob)
+      a.target = '_blank'
+      setTimeout(() => {
+        click(a)
+      }, 0)
+    }
+  </script>
 </body>
 
 </html>

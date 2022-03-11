@@ -7,7 +7,7 @@ require("core-js/modules/es.promise.js");
 var a = 10;
 
 var match = function match() {
-  console.log('arrow function2');
+  console.log('arrow function');
 };
 
 var promise = Promise.resolve();
