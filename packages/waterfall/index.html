@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .image-wrap {
+      column-count: 2;
+      column-gap: 10px;
+
+      counter-reset: count;
+      margin: 0 auto;
+      padding: 10px;
+    }
+
+    .item {
+      margin-bottom: 10px;
+      list-style: none;
+      border: 1px solid red;
+      position: relative;
+    }
+
+    .item::before {
+      position: absolute;
+      content: counter(count);
+      counter-increment: count;
+    }
+
+    .item:nth-child(4n + 1) {
+      height: 100px;
+      background: gray;
+      order: 1;
+    }
+
+    .item:nth-child(4n + 2) {
+      height: 120px;
+      background: green;
+      order: 2;
+    }
+
+    .item:nth-child(4n + 3) {
+      height: 80px;
+      background: aquamarine;
+      order: 3;
+    }
+
+    .item:nth-child(4n + 4) {
+      height: 160px;
+      background: cadetblue;
+      order: 4;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <ul class="image-wrap">
+      <li class="item"></li>
+    </ul>
+  </div>
+
+  <script>
+    const imageWrap = document.getElementsByClassName('image-wrap')[0]
+    const list = Array.from({ length: 100 }, (item, index) => index + 1)
+    const nodes = list.forEach(key => {
+      const node = document.createElement('li')
+      node.classList.add('item')
+      imageWrap.appendChild(node)
+    })
+
+  </script>
+</body>
+
+</html>

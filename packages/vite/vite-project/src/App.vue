@@ -1,64 +1,47 @@
 <template>
+  <Child ref="child" class="child" style="color: red" @increment="onChange" name="stone" :age="age" />
   <HelloWorld msg="Hello Vue 3 + Vite" />
-  <div>count: {{countRef}}</div>
-  <button @click="increment">增加</button>
-  <input type="file" @change="handleFile" />
 </template>
 
-<script>
-import { ref, reactive, isReactive, toRefs, toRef, defineComponent, onMounted } from 'vue'
+<script setup>
 import HelloWorld from './components/HelloWorld.vue'
+import Child from './components/Child.vue'
+import { ref, provide } from 'vue'
+import { searchUrlParams, joinUrl } from '@yxcx/util'
 
-export default defineComponent({
-  components: {
-    HelloWorld,
-  },
-  setup(props) {
-    const count = ref(1)
+const url =
+  'http://dev-m-kaop.sdyxmall.com/op/jfl-v2-test1/showcase?fid=1026?cb=http%3A%2F%2Fdev-m-kaop.sdyxmall.com%2Fop%2Fjfl-v2-test1%2Fshowcase%3Ffid%3D1026&loginToken=12233333jklskjsl&firstLogin=1'
 
-    const reactValue = reactive({ count })
+const navigateTo = (url, opts) => {
+  const { persisted = true, replace = false } = opts || {}
 
-    console.log('reactValue==', reactValue)
+  if (!persisted) {
+    const prefix = location.origin + location.pathname
+    const params = searchUrlParams(location.href)
+    // 添加时间戳
+    const curUrl = joinUrl(prefix, { ...params, x_time: Date.now() })
+    console.log('curUrl====', curUrl)
+    // 修改记录
+    history.replaceState({}, '', curUrl)
+  }
 
-    const copy = toRefs(reactValue)
+  if (replace) {
+    return location.replace(url)
+  }
 
-    const { count: countRef } = copy
+  location.href = url
+}
 
-    console.log('countRef==', countRef)
+navigateTo(url, { persisted: false })
 
-    const increment = () => {
-      count.value++
-    }
+const count = ref(0)
+const age = ref(18)
 
-    onMounted(() => {
-      console.log('onMounted====')
-    })
+provide('count', count)
 
-    const foo = (a, b) => {
-      console.log(Array.prototype.slice.call(arguments))
-    }
-
-    const goo = function(a, b) {}
-
-    foo(1, 2)
-
-    console.log('foo====', foo)
-    console.dir(foo)
-    console.dir(goo)
-
-    return {
-      countRef,
-      increment,
-    }
-  },
-  methods: {
-    handleFile(event) {
-      console.log('handleFile==', event.target.files)
-      const file = event.target.files[0]
-      console.log(file.slice(0, 1024))
-    },
-  },
-})
+const onChange = () => {
+  count.value++
+}
 </script>
 
 <style>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<micro-app-head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .micro-app-body {
+      background: #000;
+    }
+
+    .name {
+      color: green;
+    }
+  </style>
+
+</micro-app-head>
+
+<micro-app-body class="micro-app-body">
+  <div id="root">
+    <div class="name"></div>
+    <micro-app></micro-app>
+  </div>
+
+  <script>
+    class MicroApp extends HTMLElement {
+
+      constructor() {
+        super()
+        this.setup()
+      }
+
+      setup() {
+        const shadow = this.attachShadow({ mode: 'open' })
+        console.log('shadow===', shadow)
+        const child = this.createShadowElement()
+        const style = this.createShadowStyle()
+        shadow.appendChild(child)
+        shadow.appendChild(style)
+      }
+
+      createShadowElement() {
+        var name = document.createElement('span')
+        name.setAttribute('class', 'name')
+        name.textContent = 'stone'
+        return name
+      }
+
+      createShadowStyle() {
+        const style = document.createElement('style')
+        style.textContent = `
+        .name {
+          color: red;
+          font-size: 18px;
+        }
+        `
+        return style
+      }
+
+    }
+
+    // 使用自定义元素
+    window.customElements.define('micro-app', MicroApp)
+
+    const root = document.getElementById('root')
+    console.log('root.children', root.children)
+
+    function flatChildren(parent) {
+      const children = Array.from(parent.children)
+      for (const dom of children) {
+        console.log('dom===', dom)
+        if (dom instanceof HTMLLinkElement) {
+          console.log('HTMLLinkElement===')
+        } else if (dom instanceof HTMLScriptElement) {
+          console.log('HTMLScriptElement===')
+        } else if (dom instanceof HTMLDivElement) {
+          dom.innerHTML = `<img src="https://static-kaop.sdyxmall.com/upload/606758822f7c1fd6a02c39c0d385e4f2dbe05061-ff4b-4ab3-87e9-862d6874e25e.jpg?x-oss-process=image/resize,w_88,h_88/format,webp" />`
+        }
+        console.log('type==', Object.prototype.toString.call(dom))
+      }
+    }
+
+    flatChildren(root)
+  </script>
+</micro-app-body>
+
+</html>
